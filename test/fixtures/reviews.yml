@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  thoughts: MyString
+  evaluation: 1.5
+  created_at: 2021-09-05 06:13:57
+  update_at: 2021-09-05 06:13:57
+  customer_id: 1
+  work_id: 1
+
+two:
+  thoughts: MyString
+  evaluation: 1.5
+  created_at: 2021-09-05 06:13:57
+  update_at: 2021-09-05 06:13:57
+  customer_id: 1
+  work_id: 1
