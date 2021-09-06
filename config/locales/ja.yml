@@ -1,0 +1,6 @@
+ja:
+  enums:
+    customer:
+      gender:
+        man:     "男"
+        woman:   "女"

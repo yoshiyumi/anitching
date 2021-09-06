@@ -24,4 +24,18 @@ class Admin::Admins::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  
+  def after_sign_in_path_for(resource)
+    admin_path
+  end
+
+  #アカウント編集後のリダイレクト先
+  def after_update_path_for(resource)
+    admin_path
+  end
+
+  def after_sign_out_path_for(resource)
+     flash[:notice] = "Signed out successfully."
+     new_admin_session_path
+  end
 end

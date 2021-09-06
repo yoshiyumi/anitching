@@ -1,14 +1,22 @@
-<h2>Log in</h2>
+<div class="col-md-4 offset-md-4">
+<h2>ログイン</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<h6>会員の方はこちらからログイン</h6>
+<%= form_for(resource, as: resource_name, url: customer_session_path) do |f| %>
+
+
+
+
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "メールアドレス" %>
   </div>
 
+
+
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "パスワード" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -19,8 +27,10 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "ログイン", class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<%= render "public/customers/shared/links" %>
+<h6>会員登録がお済でない方</h6>
+<p><%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。</p>
+<div>
