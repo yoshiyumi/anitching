@@ -3,7 +3,7 @@
       <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
         <h1>作品の編集</h1>
 
-         <%= form_with model: @work,url: customer_work_path(@work.id), local:true do |f| %>
+         <%= form_with model: @work,url: work_path(@work.id), local:true do |f| %>
         <table>
           <div class="form-group">
             <label for="image">作品画像</label>
@@ -25,7 +25,7 @@
           
           <div class="form-group">
             <label for="tag">タグ</label>
-            
+            <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name%>
           </div>
           
           <div class="form-group">

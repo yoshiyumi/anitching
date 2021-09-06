@@ -15,6 +15,6 @@ class Customer < ApplicationRecord
   
    has_many :reviews, dependent: :destroy
    has_many :matchings, dependent: :destroy
-  
+   has_many :chats, dependent: :destroy
        
 end

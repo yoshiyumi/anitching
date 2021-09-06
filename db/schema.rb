@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_05_135911) do
+ActiveRecord::Schema.define(version: 2021_09_06_135422) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 2021_09_05_135911) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "room_id"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -84,6 +92,19 @@ ActiveRecord::Schema.define(version: 2021_09_05_135911) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tagmaps", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "work_id"
+    t.datetime "created_at", null: false
+    t.datetime "update_at"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -95,7 +116,7 @@ ActiveRecord::Schema.define(version: 2021_09_05_135911) do
     t.string "image_id"
     t.string "synopsis"
     t.string "release_date"
-    t.integer "gernre_id"
+    t.integer "genre_id"
     t.integer "tag_id"
     t.string "name"
     t.datetime "created_at", null: false

@@ -11,30 +11,37 @@
            <td>作品名</td>
            <td><%= @work.name %></td>
          </tr>
+        
          <tr class="work-box">
            <td>公開日</td>
            <td><%= @work.release_date %></td>
          </tr>
-         <tr class="work-box">
-           <td>ジャンル</td>
-           <td><%= @item.genre.name %></td>
-         </tr>
-         <tr class="work-box">
-           <td>タグ</td>
-           <td><%= @work.tag.name %></td>
-         </tr>
+         
          <tr class="work-box">
            <td>あらすじ</td>
            <td><%= @work.synopsis %></td>
          </tr>
+         
+         <tr class="work-box">
+           <td>ジャンル</td>
+           <td><%= @work.genre.name %></td>
+         </tr>
+         
+         <tr class="work-box">
+           <td>タグ</td>
+           <% @work.tags.each do |list| %>
+            <td><%= list.name %></td>
+           <% end %>
+         </tr>
+         
         
-        <% if @work.customer.id == current_customer.id %>
-        <td><%= link_to "編集する", edit_customer_work_path(@work.id), class:"btn btn-sm btn-success" %></td>
-        <% end %>
         
-        <% if @work.customer.id == current_customer.id %>
-        <td><%= link_to "削除する", cart_work_path(@work.id), method: :delete,data: {confirm: "削除しますか？"}, class:"btn btn-sm btn-danger" %></td>
-        <% end %>
+        <td><%= link_to "編集する", edit_work_path(@work.id), class:"btn btn-sm btn-success" %></td>
+        
+        
+        
+        <td><%= link_to "削除する", work_path(@work.id), method: :delete,data: {confirm: "削除しますか？"}, class:"btn btn-sm btn-danger" %></td>
+        
       </tbody>
     </table>
  </div>

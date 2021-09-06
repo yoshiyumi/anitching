@@ -32,6 +32,9 @@ root to: "public/homes#top"
    resources :works, only: [:index,:show,:create,:new,:edit,:update,:destroy]
    resources :comments,only: [:new,:create,:destroy]
    resources :rankings,only: [:index,:create]
+   
+   get 'chat/:id' => 'chats#show', as: 'chat'
+   resources :chats, only: [:create]
  end
 
 end
