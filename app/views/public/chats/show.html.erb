@@ -13,7 +13,7 @@
     <tbody>
         <% @chats.each do |chat| %>
             <tr>
-                <td><%= chat.customer.name %></td>
+                <td><%= chat.customer.nicname %></td>
                 <td><%= chat.message %></td>
             </tr>
         <% end %>

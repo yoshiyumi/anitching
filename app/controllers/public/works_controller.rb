@@ -1,8 +1,14 @@
 class Public::WorksController < ApplicationController
   def index
-     @works = Work.all
-     @works = Work.page(params[:page]).per(10)
-
+     @works = Work.joins(:genres).where(genres: {id: params[:genre_id]})
+    if params[:tag_id].present?
+      @works = Work.joins(:tags).where(tags: {id: params[:tag_id]}).page(params[:page]).per(10)
+    else
+      
+      @works = Work.all.page(params[:page]).per(10)
+    end
+     
+     @tags = Tag.all
   end
 
   def show
@@ -16,13 +22,10 @@ class Public::WorksController < ApplicationController
 
   def create
    @work = Work.new(work_params)
+   @work.customer_id = current_customer.id
    tag_ids = params[:work][:tag_ids]
    tag_ids.delete_at(0)
-   genre_id = params[:work][:genre_id].to_i
-   @work.genre_id = genre_id
-   
       if @work.save
-        @work.save_tags(tag_ids)
         redirect_to works_path
       else
         render :new
@@ -33,6 +36,11 @@ class Public::WorksController < ApplicationController
   def edit
     @work = Work.find(params[:id])
     @genres = Genre.all
+    if @work.customer_id == current_customer.id
+      render :edit
+    else
+      redirect_to works_path
+    end
   end
 
   def update
@@ -42,7 +50,7 @@ class Public::WorksController < ApplicationController
     if @work.update(work_params)
       redirect_to work_path(@work.id)
     else
-
+     @genres = Genre.all
      render :edit
     end
   end
@@ -54,6 +62,6 @@ class Public::WorksController < ApplicationController
   end
 
   def work_params
-    params.require(:work).permit(:name, :image, :synopsis, :release_date, :genre_id)
+    params.require(:work).permit(:name, :image, :synopsis, :release_date, :genre_id, tag_ids: [])
   end
 end

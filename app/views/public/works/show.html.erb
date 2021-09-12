@@ -3,7 +3,7 @@
       <div class="col-md-5">
         <%= attachment_image_tag @work, :image, :fill, 300, 300, format: 'jpeg', class:"attachment image fallback" %>
      </div>
-     <div class="col-md-5 ">
+     <div class="col-md-7 ">
         <h2>作品詳細</h2>
         <table class="table table-hover table-inverse">
       <tbody>
@@ -35,15 +35,36 @@
          </tr>
          
         
-        
+        <% if @work.customer.id == current_customer.id %>
         <td><%= link_to "編集する", edit_work_path(@work.id), class:"btn btn-sm btn-success" %></td>
+        <% end %>
         
-        
-        
+        <% if @work.customer.id == current_customer.id %>
         <td><%= link_to "削除する", work_path(@work.id), method: :delete,data: {confirm: "削除しますか？"}, class:"btn btn-sm btn-danger" %></td>
+        <% end %>
         
       </tbody>
     </table>
+    <div class = "row">
+      <div class = "col-md-3" >
+        <%= link_to "レビューする", new_work_review_path(@work.id), class:"btn btn-sm btn-success" %>
+      </div>
+
+      <div class = "col-md-3" >
+         <%= link_to "レビュー一覧", work_reviews_path(@work.id), class:"btn btn-sm btn-success" %>
+      </div>
+    </div>
+    
+    <div class = "row">
+      <div class = "col-md-3" >
+          <div class='star-btn' id="favorite_<%= @work.id %>">
+           <%= render "public/favorites/favorite", work: @work %>
+          </div>
+      </div>
+    </div>
+    
+    
+   
  </div>
  </div>
  </div>

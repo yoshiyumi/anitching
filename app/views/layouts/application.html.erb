@@ -1,39 +1,22 @@
 <!DOCTYPE html>
 <html>
+  
   <head>
-    <% if customer_signed_in? %>
-    <title><%= link_to "アニッチング", root_path %></title>
+    <title>アニッチング</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <% elsif admin_signed_in? %>
-    <title><%= link_to "アニッチング", admin_path %></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <% else %>
-    <title><%= link_to "アニッチング", root_path %></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <% end %>
-
-
-
   </head>
+
 
   <body>
     <header>
       <% if customer_signed_in? %>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-           <a class="navbar-brand" href="/"><span>アニッチング</span></a>
+           <a class="navbar-brand" href="/"><span><%= link_to "アニッチング", root_path %></span></a>
            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
            </button>
@@ -50,7 +33,7 @@
      <% elsif admin_signed_in? %>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-           <a class="navbar-brand" href="/"><span>アニッチング</span></a>
+           <a class="navbar-brand" href="/"><span><%= link_to "アニッチング", admin_path %></span></a>
            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
            </button>
@@ -68,7 +51,7 @@
      <% else %>
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-           <a class="navbar-brand" href="/"><span>アニッチング</span></a>
+           <a class="navbar-brand" href="/"><span><%= link_to "アニッチング", root_path %></span></a>
            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
              <span class="navbar-toggler-icon"></span>
            </button>

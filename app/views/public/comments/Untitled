@@ -1,0 +1,9 @@
+def destroy
+      @comment = current_customer.comments.build(comment_params)
+      @work = Work.find(params[:work_id])
+      @comment.destroy
+      redirect_to work_review_path(@work.id,@comment.review.id)
+    end
+    
+    
+    p><%= link_to "削除する", work_review_comment_path(@work.id, @review.id, comment.id), method: :delete,data: {confirm: "削除しますか？"},class:"btn btn-sm btn-danger" %></p>

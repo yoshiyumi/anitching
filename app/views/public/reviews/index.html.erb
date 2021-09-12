@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+      
+     <div class="col-md- ">
+        <h2>レビュー</h2>
+        <div>作品名</div>
+        <div><%= @work.name %></div>
+        <div class = "row">
+            <table class="table table-hover table-inverse">
+              <tbody>
+                <% @reviews.each do |review| %>
+                <tr class="review-box">
+                  <% if review.customer.id == current_customer.id %>
+                  <td><%= link_to review.customer.nicname, customers_my_page_path %></td>
+                  <% else %>
+                  <td><%= link_to review.customer.nicname, customer_path(review.customer.id) %></td>
+                  <% end %>
+                  <td id="star-rate-<%= review.id %>"></td>
+                  <td><%= review.thoughts %></td>
+                  <td><%= link_to "コメントする", work_review_path(@work.id, review.id), class:"btn btn-sm btn-success" %></td>
+                  <% if review.customer.id == current_customer.id %>
+                  <td><%= link_to "削除する", work_review_path(@work.id, review.id), method: :delete,data: {confirm: "削除しますか？"},class:"btn btn-sm btn-danger" %></td>
+                  <% end %>
+                  <script>
+                  $("#star-rate-<%= review.id %>").raty({
+                  size: 36,
+                  starOff:  "<%= asset_path 'star-off.png' %>",
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  half: true,
+                  readOnly: true,
+                  score: "<%= review.rate %>",
+                  })
+                  </script>
+                <% end %>
+               </tr>
+             </tbody>
+            </table>
+            
+         </div>
+         <div class = "row">
+      <div class = "col-md-5" >
+        <%= link_to "レビューする", new_work_review_path(@work.id), class:"btn btn-sm btn-success" %>
+      </div>
+     </div>
+      </div>
+    </div>
+ </div>
+ 

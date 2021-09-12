@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_06_135422) do
+ActiveRecord::Schema.define(version: 2021_09_12_102259) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 2021_09_06_135422) do
     t.datetime "update_at"
     t.integer "review_id"
     t.datetime "updated_at", null: false
+    t.integer "customer_id"
+    t.integer "parent_id"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -56,6 +59,13 @@ ActiveRecord::Schema.define(version: 2021_09_06_135422) do
     t.boolean "is_active", default: true
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "work_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "genres", force: :cascade do |t|
@@ -84,7 +94,7 @@ ActiveRecord::Schema.define(version: 2021_09_06_135422) do
 
   create_table "reviews", force: :cascade do |t|
     t.string "thoughts"
-    t.float "evaluation"
+    t.float "rate", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "update_at"
     t.integer "customer_id"
@@ -122,6 +132,7 @@ ActiveRecord::Schema.define(version: 2021_09_06_135422) do
     t.datetime "created_at", null: false
     t.datetime "update_at"
     t.datetime "updated_at", null: false
+    t.integer "customer_id"
   end
 
 end

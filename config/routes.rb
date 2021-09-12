@@ -23,18 +23,25 @@ root to: "public/homes#top"
  get "/about" => "public/homes#about"
 
   scope module: :public do
-   get "/customers/my_page" => "customers#show"
+   get "/customers/my_page" => "customers#mypage"
    get '/customers/history' => 'customers#history'
    get '/customers/confirm' => 'customers#confirm'
    patch '/customers/withdraw' => 'customers#withdraw'
-   resources :customers,only: [:show,:edit,:update]
-   resources :reviews,only: [:index,:show,:create,:edit,:update,:destroy]
-   resources :works, only: [:index,:show,:create,:new,:edit,:update,:destroy]
-   resources :comments,only: [:new,:create,:destroy]
+   resources :customers,only: [:show,:edit,:update]do
+    get :favorites, on: :collection
+   end
+   
+   resources :works, only: [:index,:show,:create,:new,:edit,:update,:destroy]do
+    resources :reviews,only: [:index,:show,:new,:create,:destroy]do
+     resources :comments,only: [:create,:destroy]
+   end
+    resources :favorites, only: [:index, :create, :destroy]
+   end
    resources :rankings,only: [:index,:create]
    
    get 'chat/:id' => 'chats#show', as: 'chat'
    resources :chats, only: [:create]
+   
  end
 
 end

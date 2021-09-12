@@ -1,2 +1,43 @@
-top
-<p><%= link_to "投稿", new_work_path %></p>
+<div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="col-md-3">
+        <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ジャンル</th>
+          </tr>
+       </thead>
+        <tbody>
+         <% @genres.each do |genre| %>
+          <tr class="genre-box">
+            <td><%= link_to genre.name, works_path(genre_id: genre.id) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+        </table>
+     </div>
+     <div class="col-md-8 offset-md-1">
+
+       <p>ようこそ、<strong>アニッチング</strong>へ！</p>
+       <p>このサイトは、アニメや書籍の感想投稿サイトになります。</p>
+       <p>感想を共有してマッチングも可能なサイトです。</p>
+       <p>会員でない方も作品の閲覧はできますが、</p>
+       <p>作品の投稿、マッチングは会員登録が必要になります。</p>
+
+        <h2>作品</h2>
+            <div class = "row">
+            <% @works.each do |work| %>
+            <div class = "work col-md-3" >
+                <%= link_to work_path(work.id) do%>
+                <%= attachment_image_tag work, :image, :fill, 100, 100, format: 'jpeg', class:"attachment image fallback" %>
+                <% end %><br>
+              <%= link_to work.name, work_path(work.id)%>
+             </div>
+            <% end %>
+            </div>
+       </div>
+       <%= link_to "作品を投稿", new_work_path %>
+    </div>
+ </div>
+
+

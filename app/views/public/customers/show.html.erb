@@ -5,9 +5,7 @@
         <h5>登録情報</h5>
       </div>
 
-      <div class = "col-md-6" >
-         <%= link_to "編集する", edit_customer_path(current_customer.id), class:"btn btn-sm btn-success" %>
-      </div>
+      
   </div>
 
 
@@ -42,14 +40,6 @@
              <%= @customer.prefectures %>
            </td>
         </tr>
-
-
-        <tr>
-           <td>メールアドレス</td>
-           <td>
-             <%= @customer.email %>
-           </td>
-        </tr>
         
         <tr>
            <td>自己紹介</td>
@@ -62,5 +52,7 @@
       </tbody>
     </table>
 
-    
+    <% if current_customer != @customer %>
+    <%= link_to 'chatを始める', chat_path(@customer.id)%>
+    <% end %>
  </div>

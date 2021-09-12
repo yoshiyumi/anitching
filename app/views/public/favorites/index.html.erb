@@ -1,0 +1,33 @@
+<p id="notice"></p>
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+              <h1>お気に入り一覧</h1>
+              
+              <% if @favorites.present? %>
+              <ul class="relative-work-lists">
+                  <% @favorite_list.each do |work| %>
+                  <li class='work-list'>
+                      <%= link_to work.name, work_path(work.id) do %>
+                      <div class='work-img-content'>
+                          <%= attachment_image_tag work, :image, :fill, 100, 100, format: 'jpeg', class:"attachment image fallback" %>
+                      </div>
+                      <div class='relative-work-name'>
+                          作品名：<%= work.name %>
+                      </div>
+                      
+                      <div class='relative-work-genre-name'>
+                          ジャンル：<%= work.genre.name %>
+                      </div>
+                      
+                      <div class='user-content'>
+                          <%= link_to work.customer.nickname, customer_path(work.customer.id) %>
+                      </div>
+                      <% end %>
+                  </li>
+              <% end %>
+              </ul>
+              <% end %>
+          </div>
+      </div>
+ </div>
