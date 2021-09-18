@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row" id = "favorite">
+    <div class="col-sm-12 col-md-8 ">
+      <h1>お気に入り一覧</h1>
+      <div class = "row">
+        <% @favorite_list.each do |favorite| %>
+          <div class = "work col-md-3" >
+            <%= link_to work_path(favorite.work.id) do %>
+              <%= attachment_image_tag favorite.work, :image, size: '150x150', format: 'jpeg', class:"attachment image fallback" %>
+            <% end %><br>
+            <%= link_to favorite.work.name, work_path(favorite.work.id) %><br>
+            <%= link_to favorite.work.customer.nicname, customer_path(favorite.work.customer.id) %>
+          </div>
+        <% end %>
+      </div>
+      <%= paginate @favorite_list, theme: 'twitter-bootstrap-4' %>
+    </div>
+  </div>
+</div> 

@@ -6,7 +6,7 @@ class Admin::TagsController < ApplicationController
 
 
   def create
-   @tag = Tag.new(tag_params)
+    @tag = Tag.new(tag_params)
     if @tag.save
       redirect_to admin_tags_path
     else
@@ -30,7 +30,6 @@ class Admin::TagsController < ApplicationController
 
   private
   def tag_params
-     params.require(:tag).permit(:name)
-
+    params.require(:tag).permit(:name)
   end
 end

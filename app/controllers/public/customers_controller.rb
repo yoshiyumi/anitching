@@ -6,6 +6,7 @@ class Public::CustomersController < ApplicationController
   
   def mypage
     @customer = current_customer
+    
   end
 
   def edit
@@ -23,13 +24,19 @@ class Public::CustomersController < ApplicationController
     if @customer.update(customer_params)
       redirect_to customers_my_page_path
     else
-     render :edit
+      render :edit
     end
 
   end
 
   def history
     @customer = current_customer
+    @works = @customer.works
+    @reviews = @customer.reviews
+  end
+  
+  def like
+    @favorite_list = Favorite.where(customer_id: current_customer.id).all.page(params[:page]).per(12)
   end
   
   def confirm
@@ -37,7 +44,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
-   @customer = current_customer
+    @customer = current_customer
     @customer.update(is_active: false)
     reset_session
     redirect_to root_path

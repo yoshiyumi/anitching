@@ -1,0 +1,46 @@
+<div class="container">
+  <h2>投稿履歴詳細</h2>
+  <div class = "row">
+    <div class = "col-md-5" >
+      <h4>投稿作品</h4>
+      <table class = "table table-bordered">
+        <thead>
+          <tr>
+            <th>作品名</th>
+            <th>ジャンル</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @works.each do |work|%>
+            <tr class="order-box">
+              <td><%= link_to work.name,work_path(work.id) %> </td>
+              <td><%= work.genre.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+      
+  <div class = "row">
+    <div class = "col-md-7" >
+      <h4>レビュー</h4>
+      <table class = "table table-bordered">
+        <thead>
+          <tr>
+            <th>作品名</th>
+            <th>感想</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reviews.each do |review|%>
+            <tr class="order-box">
+              <td><%= link_to review.work.name, work_reviews_path(review.work_id) %> </td>
+              <td><%= review.thoughts %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

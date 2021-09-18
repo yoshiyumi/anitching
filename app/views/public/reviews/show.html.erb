@@ -1,80 +1,76 @@
 <div class="container">
     <div class="row">
-      
-     <div class="col-md-10 ">
-         <h2>レビュー</h2>
-         <div>作品名</div>
-         <div><%= @work.name %></div>
-         <div class = "row">
-             <table class="table table-hover table-inverse">
-                 <tbody>
-                     <tr class="review-box">
-                         <% if @review.customer.id == current_customer.id %>
-                         <td><%= link_to @review.customer.nicname, customers_my_page_path %></td>
-                         <% else %>
-                         <td><%= link_to @review.customer.nicname, customer_path(@review.customer.id) %></td>
-                         <% end %>
-                         
-                         <td><%= @review.thoughts %></td>
-                     </tr>
-                 </tbody>
-             </table>
-         </div>
-         <div class = "row">
-             <div class = "col-md-5" >
-                  <div id="comments_area">
-                      <h2>コメント</h2>
-                      <% @comments.each do |comment| %>
-                      <% if comment.parent_id.present? || comment.id.blank? %>
-                      <% next %>
-                      <% end %>
-                      <hr>
-                      
-                      <% if comment.customer.id == current_customer.id %>
-                      <p><%= link_to comment.customer.nicname, customers_my_page_path %>: <%= comment.comment %></p>
-                      <% else %>
-                      <p> <%= link_to comment.customer.nicname, customer_path(comment.customer.id) %> : <%= comment.comment %></p>
-                      <% end %>
-                      
-                      <p> date : <%=comment.created_at.strftime("%Y-%m-%d %H:%M") %>
-                      <div id="reply_area">
-                          <% comment.replies.order(:created_at).each do |reply| %>
-                          <% if comment.customer.id == current_customer.id %>
-                          <p><%= link_to comment.customer.nicname, customers_my_page_path %>: <%= reply.comment %></p>
-                          <% else %>
-                          <p> <%= link_to comment.customer.nicname, customer_path(comment.customer.id) %> : <%= reply.comment %></p>
-                          <% end %>
-                          <p><%= link_to "削除する", work_review_comment_path(@work.id, @review.id, comment.id), method: :delete,data: {confirm: "削除しますか？"},class:"btn btn-sm btn-danger" %></p>
-                          <% end %>
-                      </div>
-                      
-                      <%= form_with(model:[@review,@comment],url: work_review_comments_path(@work.id, @review.id), local: true) do |form| %>
-                      <div class="row">
-                           <div class="form-group col-md-6">
-                               <p><label>返信する</label></p>
-                               <textarea class="form-control input-form" name="comment[comment]" rows="2"><%=@comment_reply.comment%></textarea>
-                           </div>
-                      </div>
-                      <%= form.hidden_field :review_id, value: @review.id %>
-                      <%= form.hidden_field :parent_id, value: comment.id%>
-                      <div class="actions">
-                          <%= form.submit %>
-                      </div>
-                      <% end %>
-                  </div>
-                  <% end %>
-                  
-                  <%= form_with(model:[@review,@comment],url: work_review_comments_path(@work.id, @review.id)) do |form| %>
-                  <p><label>コメントする</label></p>
-                  <textarea class="form-control input-form" name="comment[comment]" rows="5"><%=@comment.comment%></textarea>
-                  <%= form.hidden_field :review_id, value: @review.id %>
-                  <div class="actions">
-                      <%= form.submit %>
-                  </div>
-                  <% end %>
-              </div>
-           </div>
-           <%= link_to '戻る', work_reviews_path(@work.id) %>
-      </div>
+        <div class="col-md-10 ">
+            <h2>レビュー</h2>
+            <div>作品名</div>
+            <div><%= @work.name %></div>
+            <div class = "row">
+                <table class="table table-hover table-inverse">
+                    <tbody>
+                        <tr class="review-box">
+                            <% if @review.customer.id == current_customer.id %>
+                                <td><%= link_to @review.customer.nicname, customers_my_page_path %></td>
+                            <% else %>
+                                <td><%= link_to @review.customer.nicname, customer_path(@review.customer.id) %></td>
+                            <% end %>
+                            <td><%= @review.thoughts %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class = "row">
+                <div class = "col-md-5" >
+                    <div id="comments_area">
+                        <h2>コメント</h2>
+                        <% @comments.each do |comment| %>
+                            <% if comment.parent_id.present? || comment.id.blank? %>
+                            <% next %>
+                        <% end %>
+                        <hr>
+                        <% if comment.customer.id == current_customer.id %>
+                            <p><%= link_to comment.customer.nicname, customers_my_page_path %>: <%= comment.comment %><%= link_to "削除する", work_review_comment_path(@work.id, @review.id, comment.id), method: :delete,data: {confirm: "削除しますか？"},class:"btn btn-sm btn-danger" %></p>
+                        <% else %>
+                            <p> <%= link_to comment.customer.nicname, customer_path(comment.customer.id) %> : <%= comment.comment %></p>
+                        <% end %>
+                        <p> 日付 : <%=comment.created_at.strftime("%Y-%m-%d %H:%M") %>
+                        
+                        <div id="reply_area">
+                            <% comment.replies.order(:created_at).each do |reply| %>
+                                <% if reply.customer.id == current_customer.id %>
+                                    <p><%= link_to reply.customer.nicname, customers_my_page_path %>: <%= reply.comment %><%= link_to "削除する", work_review_comment_path(@work.id, @review.id, reply.id), method: :delete,data: {confirm: "削除しますか？"},class:"btn btn-sm btn-danger" %></p>
+                                <% else %>
+                                    <p><%= link_to reply.customer.nicname, customer_path(comment.customer.id) %> : <%= reply.comment %></p>
+                                <% end %>
+                            <% end %>
+                        </div>
+                        
+                        <%= form_with(model:[@review,@comment],url: work_review_comments_path(@work.id, @review.id), local: true) do |form| %>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <p><label>返信する</label></p>
+                                   <textarea class="form-control input-form" name="comment[comment]" rows="2"><%=@comment_reply.comment%></textarea>
+                                </div>
+                            </div>
+                            <%= form.hidden_field :review_id, value: @review.id %>
+                            <%= form.hidden_field :parent_id, value: comment.id%>
+                            <div class="actions">
+                                <%= form.submit %>
+                            </div>
+                        <% end %>
+                    </div>
+                    <% end %>
+                   
+                    <%= form_with(model:[@review,@comment],url: work_review_comments_path(@work.id, @review.id)) do |form| %>
+                        <p><label>コメントする</label></p>
+                        <textarea class="form-control input-form" name="comment[comment]" rows="5"><%=@comment.comment%></textarea>
+                        <%= form.hidden_field :review_id, value: @review.id %>
+                        <div class="actions">
+                            <%= form.submit %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <%= link_to '戻る', work_reviews_path(@work.id) %>
+        </div>
     </div>
 </div>

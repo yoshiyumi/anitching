@@ -1,21 +1,30 @@
-<%= form_with model: @chat do |f| %>
-    <%= f.text_field :message %>
-    <%= f.hidden_field :room_id %>
-    <%= f.submit %>
-<% end %>
-<table>
-    <thead>
-        <tr>
-            <td>投稿者名</td>
-            <td>投稿内容</td>
-        </tr>
-    </thead>
-    <tbody>
-        <% @chats.each do |chat| %>
-            <tr>
-                <td><%= chat.customer.nicname %></td>
-                <td><%= chat.message %></td>
-            </tr>
+<div class = "container">
+    <h1>メッセージ一覧</h1>
+    <table class = "table table-bordered">
+        <%= form_with model: @chat do |f| %>
+            <%= f.text_field :message %>
+            <%= f.hidden_field :room_id %>
+            <%= f.submit %>
         <% end %>
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <td>投稿者名</td>
+                <td>投稿内容</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% @chats.each do |chat| %>
+                <tr>
+                    <% if chat.customer.id == current_customer.id %>
+                        <td><%= link_to chat.customer.nicname, customers_my_page_path %></td>
+                    <% else %>
+                        <td><%= link_to chat.customer.nicname, customer_path(chat.customer.id) %></td>
+                    <% end %>
+                    <td><%= chat.message %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+ </div>
+
