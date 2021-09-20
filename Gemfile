@@ -61,3 +61,8 @@ gem 'enum_help'
 
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
+
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
