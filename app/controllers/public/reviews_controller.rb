@@ -1,4 +1,5 @@
 class Public::ReviewsController < ApplicationController
+  before_action :authenticate_customer!
   def index
      @reviews = Review.where(work_id: params[:work_id])
      @reviews = @reviews.page(params[:page]).per(10)

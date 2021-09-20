@@ -18,7 +18,7 @@
                         <td><%= @rate_ave %></td>
                         <td id="star-rate-ave"></td>
                         <script>
-                            $(document).on('turbolinks:load', function(){
+                            $("#star-rate-ave").empty();
                                 $("#star-rate-ave").raty({
                                     size: 36,
                                     starOff:  "<%= asset_path 'star-off.png' %>",
@@ -28,7 +28,7 @@
                                     readOnly: true,
                                     score: "<%= @rate_ave %>",
                                 })
-                            })
+                            
                         </script>
                     </tr>
                 </tbody>
@@ -53,7 +53,7 @@
                                 <td><%= link_to "削除する", work_review_path(@work.id, review.id), method: :delete,data: {confirm: "削除しますか？"},class:"btn btn-sm btn-danger" %></td>
                             <% end %>
                             <script>
-                                $(document).on('turbolinks:load', function(){
+                                $("#star-rate-<%= review.id %>").empty();
                                     $("#star-rate-<%= review.id %>").raty({
                                         size: 36,
                                         starOff:  "<%= asset_path 'star-off.png' %>",
@@ -63,7 +63,7 @@
                                         readOnly: true,
                                         score: "<%= review.rate %>",
                                     })
-                                })
+                                
                             </script>
                         <% end %>
                         </tr>

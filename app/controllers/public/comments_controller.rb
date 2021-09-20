@@ -1,4 +1,5 @@
 class Public::CommentsController < ApplicationController
+  before_action :authenticate_customer!
   def create
     @comment = current_customer.comments.build(comment_params)
     @work = Work.find(params[:work_id])

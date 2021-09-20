@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row" id = "search">
+        <div class="col-sm-12 col-md-8 ">
+            <h1>検索結果</h1>
+            <div class = "row">
+                <% if @range == "作品" %>
+                    <% @works.each do |work| %>
+                        <div class = "work col-md-3" >
+                            <%= link_to work_path(work.id) do %>
+                              <%= attachment_image_tag work, :image, size: '150x150', format: 'jpeg', class:"attachment image fallback" %>
+                            <% end %><br>
+                            <%= link_to work.name, work_path(work.id) %><br>
+                            <%= work.genre.name %>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <% @customers.each do |customer| %>
+                        <div class = "customer col-md-3" >
+                            <%= link_to customer_path(customer.id) do %>
+                                <%= attachment_image_tag customer, :image, size: '150x150', format: 'jpeg', class:"attachment image fallback" %>
+                            <% end %><br>
+                            <%= link_to customer.nicname, customer_path(customer.id) %>
+                        </div>
+                    <% end %>
+                <% end %>
+                
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+
+
+  
+  
+     

@@ -1,4 +1,5 @@
 class Public::WorksController < ApplicationController
+  before_action :authenticate_customer!,except: [:index, :ranking]
   def index
     @genre_id = params[:genre_id]
     if params[:genre_id].present?
