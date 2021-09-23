@@ -1,7 +1,7 @@
 <div class = "container">
     <h1>メッセージ一覧</h1>
     <table class = "table table-bordered">
-        <%= form_with model: @chat do |f| %>
+        <%= form_with model: @chat, url: chats_path do |f| %>
             <%= f.text_field :message %>
             <%= f.hidden_field :room_id %>
             <%= f.submit %>
