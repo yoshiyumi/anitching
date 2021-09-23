@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_12_102259) do
+ActiveRecord::Schema.define(version: 2021_09_23_112121) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -79,16 +79,6 @@ ActiveRecord::Schema.define(version: 2021_09_12_102259) do
     t.integer "room_id"
     t.integer "customer_id"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "rankings", force: :cascade do |t|
-    t.float "score"
-    t.integer "number"
-    t.float "point"
-    t.datetime "created_at", null: false
-    t.datetime "update_at"
-    t.integer "work_id"
     t.datetime "updated_at", null: false
   end
 
