@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <%= attachment_image_tag @work, :image, size: '350x350', format: 'jpeg', class:"attachment image fallback" %>
+        <div class="col-md-5">
+            <%= attachment_image_tag @work, :image, size: '300x300', format: 'jpeg', class:"attachment image fallback" %>
         </div>
-        <div class="col-md-8 ">
+        <div class="col-md-7 ">
             <h2>レビュー</h2>
             <table class="table table-bordered">
                 <thead>
@@ -28,14 +28,14 @@
                                     readOnly: true,
                                     score: "<%= @rate_ave %>",
                                 })
-                            
+
                         </script>
                     </tr>
                 </tbody>
             </table>
-            
-           
-            
+
+
+
             <div class = "row">
                 <table class="table table-hover table-inverse">
                     <tbody>
@@ -63,7 +63,7 @@
                                         readOnly: true,
                                         score: "<%= review.rate %>",
                                     })
-                                
+
                             </script>
                         <% end %>
                         </tr>
@@ -78,4 +78,3 @@
         </div>
     </div>
  </div>
- 

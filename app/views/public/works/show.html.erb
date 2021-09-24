@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <%= attachment_image_tag @work, :image, size: '350x350', format: 'jpeg', class:"attachment image fallback" %>
+        <div class="col-md-5">
+            <%= attachment_image_tag @work, :image, size: '300x300', format: 'jpeg', class:"attachment image fallback" %>
         </div>
-        <div class="col-md-8 ">
+        <div class="col-md-7 ">
             <h2>作品詳細</h2>
             <table class="table table-hover table-inverse">
                 <tbody>
@@ -11,22 +11,22 @@
                         <td>作品名</td>
                         <td><%= @work.name %></td>
                     </tr>
-                    
+
                     <tr class="work-box">
                         <td>公開日</td>
                         <td><%= @work.release_date %></td>
                     </tr>
-                     
+
                     <tr class="work-box">
                         <td>あらすじ</td>
                         <td><%= @work.synopsis %></td>
                     </tr>
-                     
+
                     <tr class="work-box">
                         <td>ジャンル</td>
                         <td><%= @work.genre.name %></td>
                     </tr>
-                     
+
                     <tr class="work-box">
                         <td>タグ</td>
                         <% @work.tags.each do |list| %>
@@ -36,7 +36,7 @@
                     <% if @work.customer.id == current_customer.id %>
                         <td><%= link_to "編集する", edit_work_path(@work.id), class:"btn btn-sm btn-success" %></td>
                     <% end %>
-                    
+
                     <% if @work.customer.id == current_customer.id %>
                         <td><%= link_to "削除する", work_path(@work.id), method: :delete,data: {confirm: "削除しますか？"}, class:"btn btn-sm btn-danger" %></td>
                     <% end %>
