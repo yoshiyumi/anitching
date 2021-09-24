@@ -26,6 +26,26 @@ class Customer < ApplicationRecord
     end
   end
   
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy 
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy 
+  has_many :following_customer, through: :follower, source: :followed 
+  has_many :follower_customer, through: :followed, source: :follower 
+
+ 
+  def follow(cusromer_id)
+    follower.create(followed_id: cusromer_id)
+  end
+
+ 
+  def unfollow(customer_id)
+    follower.find_by(followed_id: customer_id).destroy
+  end
+
+ 
+  def following?(customer)
+    following_customer.include?(customer)
+  end
+  
   has_many :reviews, dependent: :destroy
   has_many :matchings, dependent: :destroy
   has_many :chats, dependent: :destroy
