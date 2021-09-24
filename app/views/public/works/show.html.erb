@@ -33,15 +33,24 @@
                             <td><%= list.name %></td>
                         <% end %>
                     </tr>
+                </tbody>
+            </table>
+
+            <div class = "row">
+                <div class = "col-md-3" >
                     <% if @work.customer.id == current_customer.id %>
                         <td><%= link_to "編集する", edit_work_path(@work.id), class:"btn btn-sm btn-success" %></td>
                     <% end %>
-
+                </div>
+                <div class = "col-md-3" >
                     <% if @work.customer.id == current_customer.id %>
                         <td><%= link_to "削除する", work_path(@work.id), method: :delete,data: {confirm: "削除しますか？"}, class:"btn btn-sm btn-danger" %></td>
                     <% end %>
-                </tbody>
-            </table>
+                </div>
+            </div>
+
+            <p></p>
+
             <div class = "row">
                 <div class = "col-md-3" >
                     <%= link_to "レビューする", new_work_review_path(@work.id), class:"btn btn-sm btn-success" %>
