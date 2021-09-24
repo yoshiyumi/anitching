@@ -12,7 +12,7 @@ Rails.application.routes.draw do
    resources :tags,only: [:index,:create,:edit,:update]
    resources :works, only: [:index,:show,:destroy]
  end
-
+ 
  devise_for :customers, controllers: {
    sessions:      'public/customers/sessions',
    passwords:     'public/customers/passwords',
@@ -40,10 +40,10 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create, :destroy]
    end
    resources :rooms,only: [:index]
-
+   
    get 'chat/:id' => 'chats#show', as: 'chat'
    resources :chats, only: [:create]
-
+   
  end
 
 end
