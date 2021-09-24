@@ -20,17 +20,17 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div class="col-md-8 offset-md-1">
             <h1>作品一覧</h1>
-            <div class = "col-md-6" >
+            <div>
                 <%= link_to "＋", new_work_path, class:"btn btn-primary rounded-circle "%>
             </div>
             <div class = "row">
                 <% @works.each do |work| %>
                     <div class = "work col-md-3" >
                         <%= link_to work_path(work.id) do%>
-                            <%= attachment_image_tag work, :image, size: '150x150',format: 'jpeg', class:"attachment image fallback" %>
+                            <%= attachment_image_tag work, :image, size: '100x100',format: 'jpeg', class:"attachment image fallback" %>
                         <% end %><br>
                         <%= link_to work.name, work_path(work.id)%><br>
                         <%= work.release_date %>
