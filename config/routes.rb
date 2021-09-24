@@ -12,7 +12,7 @@ Rails.application.routes.draw do
    resources :tags,only: [:index,:create,:edit,:update]
    resources :works, only: [:index,:show,:destroy]
  end
- 
+
  devise_for :customers, controllers: {
    sessions:      'public/customers/sessions',
    passwords:     'public/customers/passwords',
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
  root to: "public/homes#top"
  get "search" => "searches#search"
  get "/about" => "public/homes#about"
+ get "/follow" => "public/homes#follow"
 
   scope module: :public do
    get "/customers/my_page" => 'customers#mypage'
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
    patch '/customers/withdraw' => 'customers#withdraw'
    resources :customers,only: [:show,:edit,:update]do
     get :favorites, on: :collection
+    resources :relationships, only: [:create, :destroy]
    end
    get '/works/ranking/:ranking_name' => 'works#ranking', as: 'works_ranking'
    resources :works, only: [:index,:show,:create,:new,:edit,:update,:destroy]do
@@ -40,10 +42,10 @@ Rails.application.routes.draw do
     resources :favorites, only: [:create, :destroy]
    end
    resources :rooms,only: [:index]
-   
+
    get 'chat/:id' => 'chats#show', as: 'chat'
    resources :chats, only: [:create]
-   
+
  end
 
 end
