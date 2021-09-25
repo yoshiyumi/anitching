@@ -1,5 +1,5 @@
 <div class = "container">
-    <h1>メッセージ一覧</h1>
+    <h1><%= @customer.nicname %>さんとのメッセージ</h1>
     <div>
         <%= form_with model: @chat, url: chats_path, local:true do |f| %>
             <%= f.text_field :message %>
@@ -23,6 +23,9 @@
                         <td><%= link_to chat.customer.nicname, customer_path(chat.customer.id) %></td>
                     <% end %>
                     <td><%= chat.message %></td>
+                    <% if chat.customer.id == current_customer.id %>
+                        <td><%= link_to "削除する", chat_path(chat.id), method: :delete,data: {confirm: "削除しますか？"}, class:"btn btn-sm btn-danger" %></td>
+                    <% end %>
                 </tr>
             <% end %>
         </tbody>

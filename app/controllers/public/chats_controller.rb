@@ -15,9 +15,16 @@ class Public::ChatsController < ApplicationController
         @chats = @room.chats
         @chat = Chat.new(room_id: @room.id)
     end
+    
     def create
         @chat = current_customer.chats.new(chat_params)
         @chat.save
+        redirect_to request.referer
+    end
+    
+    def destroy
+        @chat = Chat.find(params[:id])
+        @chat.destroy
         redirect_to request.referer
     end
 
