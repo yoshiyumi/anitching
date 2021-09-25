@@ -44,6 +44,7 @@ Rails.application.routes.draw do
    resources :rooms,only: [:index]
 
    get 'chat/:id' => 'chats#show', as: 'chat'
+   delete 'chat/:id' => 'chats#destroy'
    resources :chats, only: [:create]
 
  end
