@@ -19,15 +19,16 @@
         </tbody>
       </table>
     </div>
-    
+
     <div class="col-md-8 offset-md-1">
       <h1>ランキング</h1>
       <div class = "row">
-        <% @reviews.each do |review| %>
+        <% @reviews.each.with_index(1) do |review,i| %>
           <div class = "work col-md-3" >
             <%= link_to work_path(review.work_id) do %>
               <%= attachment_image_tag review.work, :image, size: '100x100', format: 'jpeg', class:"attachment image fallback" %>
             <% end %><br>
+            第<%= i  %>位<br>
             <%= link_to review.work.name, work_path(review.work_id) %>
           </div>
         <% end %>
