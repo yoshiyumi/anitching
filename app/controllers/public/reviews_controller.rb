@@ -11,8 +11,8 @@ class Public::ReviewsController < ApplicationController
       @review = Review.find(params[:id])
       @work = Work.find(params[:work_id])
       @comments = @review.comments
-      @comment = @review.comments.build 
-      @comment_reply = @review.comments.build 
+      @comment = @review.comments.build
+      @comment_reply = @review.comments.build
   end
 
   def new
@@ -29,15 +29,21 @@ class Public::ReviewsController < ApplicationController
       else
         render :new
       end
-   
+
   end
 
-  
+
   def destroy
-      @review = Review.find(params[:id])
-      @review.work_id =  params[:work_id]
+    @review = Review.find(params[:id])
+    @review.work_id =  params[:work_id]
+    if @review.customer_id == current_customer.id
       @review.destroy
-       redirect_to work_reviews_path(params[:work_id])
+      redirect_to work_reviews_path(params[:work_id])
+    else
+      redirect_to work_reviews_path(params[:work_id])
+    end
+
+
   end
 
   def review_params
