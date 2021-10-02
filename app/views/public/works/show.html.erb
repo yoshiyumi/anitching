@@ -1,29 +1,32 @@
 <div class="container">
     <div class="row">
         <div class="col-md-5">
-            <%= attachment_image_tag @work, :image, size: '300x300', format: 'jpeg', class:"attachment image fallback" %>
+            <%= attachment_image_tag @work, :image, size: '500x500', format: 'jpeg', class:"attachment image fallback" %>
         </div>
-        <div class="col-md-7 ">
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
             <h2>作品詳細</h2>
-            <table class="table table-hover table-inverse">
+            <table class="table table-hover table-inverse" >
                 <tbody>
-                    <tr class="work-box">
-                        <td>作品名</td>
+                    <tr class="work-name">
+                        <th width="200">作品名</th>
                         <td><%= @work.name %></td>
                     </tr>
 
-                    <tr class="work-box">
-                        <td>公開日</td>
+                    <tr class="work-release-date">
+                        <th width="200">公開日</th>
                         <td><%= @work.release_date %></td>
                     </tr>
 
-                    <tr class="work-box">
-                        <td>あらすじ</td>
+                    <tr class="work-synopsis">
+                        <th width="200">あらすじ</th>
                         <td><%= @work.synopsis %></td>
                     </tr>
 
-                    <tr class="work-box">
-                        <td>ジャンル</td>
+                    <tr class="work-genre">
+                        <th width="200">ジャンル</th>
                         <td><%= @work.genre.name %></td>
                     </tr>
                 </tbody>
@@ -31,8 +34,8 @@
 
             <table class="table table-hover table-inverse">
                 <tbody>
-                    <tr class="work-box">
-                        <td>タグ</td>
+                    <tr class="work-tag">
+                        <th width="200">タグ</th>
                         <% @work.tags.each do |list| %>
                             <td><%= list.name %></td>
                         <% end %>
