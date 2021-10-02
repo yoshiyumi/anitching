@@ -10,6 +10,8 @@ class Work < ApplicationRecord
     
     accepts_nested_attributes_for :tags, allow_destroy: true
     
+    
+    
     def self.looks(search, word)
         if search == "perfect_match"
           @work = Work.where("name LIKE?", "#{word}")
