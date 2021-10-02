@@ -5,13 +5,13 @@ class Work < ApplicationRecord
     belongs_to :customer
     has_many :reviews, dependent: :destroy
     has_many :favorites, dependent: :destroy
-    
+
     attachment :image
-    
+
     accepts_nested_attributes_for :tags, allow_destroy: true
-    
-    
-    
+
+    validates :name, presence: true
+
     def self.looks(search, word)
         if search == "perfect_match"
           @work = Work.where("name LIKE?", "#{word}")

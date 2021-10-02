@@ -29,6 +29,7 @@ class Public::WorksController < ApplicationController
   end
 
   def create
+    @genres = Genre.all
     @work = Work.new(work_params)
     @work.customer_id = current_customer.id
     tag_ids = params[:work][:tag_ids]
@@ -67,6 +68,7 @@ class Public::WorksController < ApplicationController
   end
 
   def update
+    @genres = Genre.all
     @work = Work.find(params[:id])
     tag_ids = params[:work][:tag_ids]
     tag_ids.delete_at(0)
