@@ -15,7 +15,7 @@ class Public::WorksController < ApplicationController
         @works = Work.all.page(params[:page]).per(12)
       end
     end
-     
+
     @tags = Tag.all
   end
 
@@ -49,7 +49,7 @@ class Public::WorksController < ApplicationController
       redirect_to works_path
     end
   end
-  
+
   def ranking
     @genres = Genre.all
     if params[:ranking_name] == "評価順"
@@ -63,7 +63,7 @@ class Public::WorksController < ApplicationController
       @works = Work.where(genre_id: params[:genre_id]).pluck(:id)
       @reviews = Review.where(work_id: @works).group(:work_id).order('count desc').limit(50).select("COUNT(reviews.rate) as count, reviews.work_id")
     end
-      
+
   end
 
   def update
@@ -77,11 +77,15 @@ class Public::WorksController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @work = Work.find(params[:id])
-    @work.destroy
-    redirect_to works_path
+    if @work.customer_id == current_customer.id
+      @work.destroy
+      redirect_to works_path
+    else
+      redirect_to work_path(params[:id])
+    end
   end
 
   def work_params
