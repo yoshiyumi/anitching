@@ -2,19 +2,19 @@ class Admin::WorksController < ApplicationController
   def index
       @genre_id = params[:genre_id]
       if params[:genre_id].present?
-          @works = Work.where(genre_id: params[:genre_id]).page(params[:page]).per(12)
+          @works = Work.where(genre_id: params[:genre_id]).page(params[:page]).per(20)
           if params[:tag_id].present?
-              @works = @works.joins(:tags).where(tags: {id: params[:tag_id]}).page(params[:page]).per(12)
+              @works = @works.joins(:tags).where(tags: {id: params[:tag_id]}).page(params[:page]).per(20)
           end
       else
           @works = Work.all
           if params[:tag_id].present?
-              @works = @works.joins(:tags).where(tags: {id: params[:tag_id]}).page(params[:page]).per(12)
+              @works = @works.joins(:tags).where(tags: {id: params[:tag_id]}).page(params[:page]).per(20)
           else
-              @works = Work.all.page(params[:page]).per(12)
+              @works = Work.all.page(params[:page]).per(20)
           end
       end
-      
+
       @tags = Tag.all
   end
 
@@ -27,8 +27,8 @@ class Admin::WorksController < ApplicationController
       @genres = Genre.all
   end
 
-  
-  
+
+
   def destroy
       @work = Work.find(params[:id])
       @work.destroy
